@@ -13,24 +13,30 @@ router.get('/', (ctx, next) => {
 
 
 router.get('/pokemon', async(ctx, next) => {
-    // Pegar Lista dos Pokemon
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=1118');
-    
-    // Definir Results
-    var results = response.data.results;
+    const parametros = ctx. query.numero
+    if (!parametros) { 
+        ctx.body="Nao existe";
+        ctx.status=400
+        return 
+    }
+    //Filtrando com find pokemons de um numero especifico.
 
-    // Extrair nomes
-    // var pokeNames = [];
-    // for (pokemon of results) {
-    //     pokeNames.push(pokemon.name)       
-    // }
+    var pokemon = results.find((pokemon)=>{ return pokemon.url.includes(parametros) })
 
-    var mapResults = results.map ((pokemon) => pokemon.name)
-    console.log("Resultado do map", mapResults);
+     // Devolver resposta para o usuario
+     ctx.body = pokemon
 
-    // Devolver resposta para o usuario
-    ctx.body = mapResults.
 });
+
+router.get('/pokemon/name', (ctx, next) => {
+    var mapResults = results.map ((pokemon) => pokemon.name)
+    ctx.body = mapResults
+}); 
+
+
+
+    
+   
 
 
 app
@@ -40,6 +46,25 @@ app
 app.listen(3000, function() {
     console.log(("Server na porta 3000"));
 });
+
+
+//----------------------- Comentarios---------------------------
+
+// Pegar Lista dos Pokemon
+const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=1118');
+    
+// Definir Results
+var results = response.data.results;
+
+// Extrair nomes
+// var pokeNames = [];
+// for (pokemon of results) {
+//     pokeNames.push(pokemon.name)       
+// }
+
+//Filtrando pela primeira letra do nome "P"
+var filtroLetra = mapResults.filter((name)=>{ return name[0]=="p"})
+
 
 /*
 criar um endpoint que retorne pokemons aleatorios;
