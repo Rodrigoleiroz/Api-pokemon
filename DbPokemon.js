@@ -55,11 +55,19 @@ var pegaTudo = () => {
     return bancoDeDados
 }
 
+var pegaTodosOsNomes = () => {
+   return bancoDeDados.map((pokemon) => pokemon.nome)
+}
+
+
 module.exports = {
+    //Essa e a forma equivalente a 
     adicionarPokemon: adicionarPokemon,
+    //essas a baixo
     deletarPokemon,
     atualizarPokemon,
     save,
     pegaTudo,
-    pegaPokemon
+    pegaPokemon,
+    pegaTodosOsNomes
 }

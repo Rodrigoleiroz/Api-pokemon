@@ -3,7 +3,12 @@ const axios = require('axios');
 var koa = require("koa");
 var Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
-const { pegaTudo, pegaPokemon } = require("./DbPokemon");
+const db = require("./DbPokemon");
+// const { pegaTudo, pegaPokemon, pegaTodos, pegaTodosOsNomes, adicionarPokemon } = require("./DbPokemon");
+// const bdpokemon = require("./DbPokemon");
+// cosnt pegatudo = dbpokemon.pegatudo
+// dbpokemon.pegatudo()
+
 
 const app = new koa();
 var router = new Router();
@@ -11,19 +16,35 @@ app.use(bodyParser())
 // -------------------- ROTAS
 
 router.get('/pokemon', async(ctx, next) => {
-    ctx.body = pegaTudo()
+    ctx.body = db.pegaTodosOsNomes()
   });
 
   router.get('/pokemon/:nome', async(ctx, next) => {
     var nomePokemon = ctx.params.nome
-    ctx.body = pegaPokemon(nomePokemon)
+    ctx.body = db.pegaPokemon(nomePokemon)
   });
 
 
 
 router.post('/pokemon', async(ctx, next) => {
-    ctx.body = "ok POST"
+    var novoPokemon = ctx.request.body
+    ctx.body = db.adicionarPokemon(novoPokemon.nome, novoPokemon.nivel, novoPokemon.tipo);
+    ctx.body = db.save()
     ctx.body = ctx.request.body;
+});
+
+router.patch('/pokemon', async(ctx, next) => {
+  var pokemonAtualizado = ctx.request.body
+  ctx.body = db.atualizarPokemon(pokemonAtualizado.nome, pokemonAtualizado.nivel, pokemonAtualizado.tipo);
+  ctx.body = db.save()
+  ctx.body = ctx.request.body;
+});
+
+router.delete('/pokemon', async(ctx, next) => {
+  var pokemonParaDeletar = ctx.request.body
+  ctx.body = db.deletarPokemon(pokemonParaDeletar.nome);
+  ctx.body = db.save()
+  ctx.body = ctx.request.body;
 });
 
 // -------------------- SETUP
