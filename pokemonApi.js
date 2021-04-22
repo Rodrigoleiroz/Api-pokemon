@@ -1,9 +1,9 @@
-const usandoPokemons = require ("./DbPokemon")
 const axios = require('axios');
 var koa = require("koa");
 var Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
 const db = require("./DbPokemon");
+const dbMongo = require("./DbPokemonMongo");
 // const { pegaTudo, pegaPokemon, pegaTodos, pegaTodosOsNomes, adicionarPokemon } = require("./DbPokemon");
 // const bdpokemon = require("./DbPokemon");
 // cosnt pegatudo = dbpokemon.pegatudo
@@ -16,7 +16,8 @@ app.use(bodyParser())
 // -------------------- ROTAS
 
 router.get('/pokemon', async(ctx, next) => {
-    ctx.body = db.pegaTodosOsNomes()
+//    ctx.body = db.pegaTodosOsNomes()
+ctx.body = dbMongo.pegaTodosOsNomes()
   });
 
   router.get('/pokemon/:nome', async(ctx, next) => {
