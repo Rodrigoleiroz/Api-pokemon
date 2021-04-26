@@ -56,7 +56,7 @@ var pegaTudo = () => {
 }
 
 //Funcao que quando chamada pega todos os nomes de pokemon.
-var pegaTodosOsNomes = () => {
+var pegaTodosOsNomes = async () => {
    //return bancoDeDados.map((pokemon) => pokemon.nome)
 
    //importa que gera um client mongo ja pre configurado, pronto para pegar os dados no banco.
@@ -69,10 +69,45 @@ var pegaTodosOsNomes = () => {
     const pokeCollection = database.collection("pokemons");
 
     // pega todos os pokemons
+    const resultado = pokeCollection.find();
+    if ((await resultado.count()) === 0) {
+        console.log("No documents found!");
+      }
+
+    const result = []
+    await resultado.forEach((item) => result.push(item));
+
+    return result
     // retorna todos os nomes de pokemons
 
+}
 
+var pegaPokemon = async (idPraPegar) => {
 
+    const getClient = require("./mongo")
+
+    const client = await getClient();
+
+    const database = client.db("Pokedex");
+
+    const pokeCollection = database.collection("pokemons");
+
+   // retorna todos os nomes de pokemons
+
+    const resultado = pokeCollection.find(idPraPegar);
+    if ((await resultado.count()) === 0) {
+        console.log("No documents found!");
+      }
+
+    const result = []
+    await resultado.forEach((item) => result.push(item));
+
+    result 
+    console.log("resultado do find", findResults)
+
+    return result
+    
+    
 }
 
 

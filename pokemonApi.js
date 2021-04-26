@@ -17,12 +17,12 @@ app.use(bodyParser())
 
 router.get('/pokemon', async(ctx, next) => {
 //    ctx.body = db.pegaTodosOsNomes()
-ctx.body = dbMongo.pegaTodosOsNomes()
+ctx.body =  await dbMongo.pegaTodosOsNomes()
   });
 
-  router.get('/pokemon/:nome', async(ctx, next) => {
-    var nomePokemon = ctx.params.nome
-    ctx.body = db.pegaPokemon(nomePokemon)
+  router.get('/pokemon/:id', async(ctx, next) => {
+    var idPokemon = ctx.params.id
+    ctx.body = await dbMongo.pegaPokemon(idPokemon)
   });
 
 
