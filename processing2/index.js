@@ -1,7 +1,7 @@
 const utils = require('./utils');
 const services = require('./services');
 
-const main = async () => {
+const main = async() => {
     try {
         const listaComTodosOsPokemons = await services.pegaTodosOsPokemons();
         console.log('lista todos pokemons', listaComTodosOsPokemons);
