@@ -1,17 +1,41 @@
-// Pegar listão de todos os pokemons do Poke API
+const utils = require('./utils');
+const services = require('./services');
 
-// Funcao para extrair todos os nomes
+const main = async () => {
+  try {
+    const listaComTodosOsPokemons = await services.pegaTodosOsPokemons();
+    console.log('lista todos pokemons', listaComTodosOsPokemons);
+    const listaDosNomesDosPokemons = utils.extraiNomesPokemons(listaComTodosOsPokemons);
+    const listaDasRegioes = await services.ListaTodasAsRegioes();
+    console.log(listaDasRegioes);
+    console.time('rola');
+    const resultado = await services.pegaDadosParalelos([55, 110, 165, 823]);
+    console.timeEnd('rola');
+    const pegandoUrl = utils.pegandoUrlComplemento(resultado);
+    const pegaDetalhesPeloNome = utils.detalhesPokemonPeloNome(listaComTodosOsPokemons, 'suicune');
+    console.log(pegaDetalhesPeloNome);
 
-// Funcao para buscar os nomes que contenham uma string
+    return console.log('Tudo certo');
+  } catch (error) {
+    return console.log('Deu ruim manim');
+  }
+};
 
-// Funcao para pegar detalhes de um pokemon pra dado um nome (canse insensitive)
+main();
 
-// Funcao que recebe dois nomes de pokemons e diz se o primeiro é forte contra o segundo (não precisa ter todos os casos possiveis)
-
-// Funcao que lista todas as regioes possiveis
-
-// Funcao que lista os pokemons de uma regiao especifica
-
-// Funcao que recebe um dicionario de dados de pokemon e retorna um outro dicionario com os dados dos pokemons com as chaves em portugues
-
-// funcao que traduz todas as chaves das propriedades de uma lista de pokemon
+// const tratandoErros = (teste) => {
+//   try {
+//     const maisTeste = teste.split('/');
+//     return maisTeste;
+//   } catch (error) {
+//     console.log('deu ruim');
+//     return "ruiiiiim"
+//     throw new Error("DEU MERDA IRMAO")
+//   }
+// };
+// try {
+//     let TestandoTratandoErros = tratandoErros(03041990);
+//     console.log(TestandoTratandoErros);
+// } catch (error) {
+//     console.log(error)
+// }

@@ -1,7 +1,6 @@
 {
   "name": "api_koa_pokemon",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,9 +9,26 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
+    "bluebird": "^3.7.2",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.0.0",
-    "mongodb": "^3.6.6"
-  }
+    "mongodb": "^3.6.6",
+    "readline-sync": "^1.4.10",
+    "redis": "^3.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rodrigoleiroz/Api-pokemon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Rodrigoleiroz/Api-pokemon/issues"
+  },
+  "homepage": "https://github.com/Rodrigoleiroz/Api-pokemon#readme",
+  "description": ""
 }

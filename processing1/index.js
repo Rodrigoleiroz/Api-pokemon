@@ -44,63 +44,66 @@ console.log("sera que funfo", resultado);
 
 // Busca mais generica.
 
-let pedaco1 = "cacti"
 
-const busca = data.flowerlist.filter((flor) => {
-    //Busca no nome.
-    const achouNome =  flor.name.toLowerCase().includes(pedaco1.toLowerCase())
-    //Busca na descricao.
-    const achouCategoria =  flor.category.toLowerCase().includes(pedaco1.toLowerCase())
 
-    //Retorna se achou ou nao.
-    return achouNome || achouCategoria
-});
+const buscaFlores = (listaDeFlores, parteNomeOuCategoria) => { 
+    return listaDeFlores.filter((flor) => {
+        const achouNome =  flor.name.toLowerCase().includes(parteNomeOuCategoria.toLowerCase())
+        const achouCategoria =  flor.category.toLowerCase().includes(parteNomeOuCategoria.toLowerCase())
+            return achouNome || achouCategoria
+    });
+    
+}
 
-console.log("Busca Generica", busca);
+let buscaPorNomeOuCategoria = buscaFlores (data.flowerlist, "red")
 
 
 //funcao que recebe uma lista de flores e retorna o preço total
 
-let total = 0
-let nomes = []
 
-data.flowerlist.forEach ((flor ) => {
-    let preco = flor.price;
-    total = total + preco
- 
-    let nome = flor.name;
-    nomes.push(nome)
 
-})
+const totalDosPrecos = (listaDeFlores) => { 
+    let total = 0
+    
+    listaDeFlores.forEach ((flor ) => { 
 
-console.log("Total", total)
-console.log("Nomes", nomes)
+        let preco = flor.price;
+        total = total + preco;
+    })
+    return total
+}
+let totalPrecos = totalDosPrecos(data.flowerlist)
+let totalPrecos2 = totalDosPrecos(data.flowerlist)
+
 
 
 
 
 // funcao que pega uma só flor baseada no ID
-let id = 34
-const achaPeloId = data.flowerlist.find((flor) =>  flor.productId == id );
 
-console.log(achaPeloId);
+const achaPeloId = (listaDeFlores, id) => {
+
+  return listaDeFlores.find((flor) => flor.productId == id );
+        
+}
+var buscandoPeloId = achaPeloId (data.flowerlist, 33)
+console.log(buscandoPeloId)
 
 // funcao que retorna as flores agrupadas por categorias
 
 const agrupaCategorias = (listaDeFlores) => {
 
-function dictionary(list) {
-    var map = {};
+    var categorias = {};
         
-    for (var i = 0; i < list.length; ++i) {
-    var category = list[i].category;
-    if (!map[category])
-        map[category] = [];
-     map[category].push(list[i].name)
+    for (var i = 0; i < listaDeFlores.length; ++i) {
+        var currentCategory = listaDeFlores[i].category;
+        if (categorias[currentCategory] == undefined){
+            categorias[currentCategory] = [];
+        }
+        categorias[currentCategory].push(listaDeFlores[i].name)
 
     }
-    return map;
+    return categorias;
 }
 
-    var d = dictionary(list)
-
+    var d = agrupaCategorias(data.flowerlist)
