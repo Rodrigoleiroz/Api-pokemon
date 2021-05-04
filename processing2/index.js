@@ -6,7 +6,7 @@ const main = async() => {
         const listaComTodosOsPokemons = await services.pegaTodosOsPokemons();
         console.log('lista todos pokemons', listaComTodosOsPokemons);
         const listaDosNomesDosPokemons = utils.extraiNomesPokemons(listaComTodosOsPokemons);
-    const listaDasRegioes = await services.ListaTodasAsRegioes();
+        const listaDasRegioes = await services.listaTodasAsRegioes();
         console.log(listaDasRegioes);
         console.time('rola');
         const resultado = await services.pegaDadosParalelos([55, 110, 165, 823]);
