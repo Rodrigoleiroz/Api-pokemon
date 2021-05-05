@@ -10,7 +10,14 @@ const extraiNomesForeach = (listaDeFlores) => {
     return todosOsNomes
 };
 
+const buscaFloresPeloNome = (flowerlist, nomeParaProcurar) => {
+    return flowerlist.find((flor) => flor.name.toLowerCase().includes(nomeParaProcurar.toLowerCase()))
+}
+
+
 module.exports = {
     extraiNomesMap,
     extraiNomesForeach,
+    buscaFloresPeloNome,
+
 }

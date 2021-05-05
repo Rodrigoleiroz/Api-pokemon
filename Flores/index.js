@@ -9,14 +9,12 @@ const data = JSON.parse(jsonData);
 //chamadas
 
 const nomes = utils.extraiNomesForeach(data.flowerlist);
-const nomes2 = utils.extraiNomesMap(data.flowerlist)
+const nomes2 = utils.extraiNomesMap(data.flowerlist);
+const buscaNome = utils.buscaFloresPeloNome(data.flowerlist, "cAc")
 
 console.log("Todos os nomes", resultadoTodosNomes)
 
 // funcao que busca por flores dado um pedaço do nome ou descriçao
-var buscaFloresPeloNome = (flowerlist, nomeParaProcurar) => {
-    return flowerlist.find((flor) => flor.name.toLowerCase().includes(nomeParaProcurar.toLowerCase()))
-}
 
 var resultado = buscaFloresPeloNome(data.flowerlist, "opu")
 
