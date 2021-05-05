@@ -1,35 +1,15 @@
-// funcao que le o arquivo e transforma em JSON
+const fs = require("fs");
+const utils = require('./utils');
 
-//'------------Sync------------'
-let fs = require("fs");
-
-let jsonData = fs.readFileSync("./processing1/data.json", "utf8");
-console.log(jsonData);
-
-const data = JSON.parse(jsonData)
-
-// funcao que extrai todos os nome
-//'-----------------map-------------------'
-
-let ExtrairTodosOsNomes = (listaDeFlores) => { 
-
-    return listaDeFlores.map((flor) => flor.name )
+const jsonData = fs.readFileSync("./flores/data.json", "utf8");
+const data = JSON.parse(jsonData);
 
 
-    // return listaDeFlores.map(item => item.name) 
-    // return listaDeFlores.map(extraiNome) 
-}
 
-var resultadoTodosNomes = ExtrairTodosOsNomes(data.flowerlist)
-//'-----------------forEach---------------'
-// let todosOsNomes = []
+//chamadas
 
-// floresLista.flowerlist.forEach ((flor) => {
-//     let nomes = flor.name;
-//     todosOsNomes.push(nomes)
-//     return nomes
-    
-// })
+const nomes = utils.extraiNomes(data.flowerlist);
+const nomes2 = utils.extrairTodosOsNomes(data.flowerlist)
 
 console.log("Todos os nomes", resultadoTodosNomes)
 
@@ -46,26 +26,26 @@ console.log("sera que funfo", resultado);
 
 
 
-const buscaFlores = (listaDeFlores, parteNomeOuCategoria) => { 
+const buscaFlores = (listaDeFlores, parteNomeOuCategoria) => {
     return listaDeFlores.filter((flor) => {
-        const achouNome =  flor.name.toLowerCase().includes(parteNomeOuCategoria.toLowerCase())
-        const achouCategoria =  flor.category.toLowerCase().includes(parteNomeOuCategoria.toLowerCase())
-            return achouNome || achouCategoria
+        const achouNome = flor.name.toLowerCase().includes(parteNomeOuCategoria.toLowerCase())
+        const achouCategoria = flor.category.toLowerCase().includes(parteNomeOuCategoria.toLowerCase())
+        return achouNome || achouCategoria
     });
-    
+
 }
 
-let buscaPorNomeOuCategoria = buscaFlores (data.flowerlist, "red")
+let buscaPorNomeOuCategoria = buscaFlores(data.flowerlist, "red")
 
 
 //funcao que recebe uma lista de flores e retorna o preço total
 
 
 
-const totalDosPrecos = (listaDeFlores) => { 
+const totalDosPrecos = (listaDeFlores) => {
     let total = 0
-    
-    listaDeFlores.forEach ((flor ) => { 
+
+    listaDeFlores.forEach((flor) => {
 
         let preco = flor.price;
         total = total + preco;
@@ -83,10 +63,10 @@ let totalPrecos2 = totalDosPrecos(data.flowerlist)
 
 const achaPeloId = (listaDeFlores, id) => {
 
-  return listaDeFlores.find((flor) => flor.productId == id );
-        
+    return listaDeFlores.find((flor) => flor.productId == id);
+
 }
-var buscandoPeloId = achaPeloId (data.flowerlist, 33)
+var buscandoPeloId = achaPeloId(data.flowerlist, 33)
 console.log(buscandoPeloId)
 
 // funcao que retorna as flores agrupadas por categorias
@@ -94,10 +74,10 @@ console.log(buscandoPeloId)
 const agrupaCategorias = (listaDeFlores) => {
 
     var categorias = {};
-        
+
     for (var i = 0; i < listaDeFlores.length; ++i) {
         var currentCategory = listaDeFlores[i].category;
-        if (categorias[currentCategory] == undefined){
+        if (categorias[currentCategory] == undefined) {
             categorias[currentCategory] = [];
         }
         categorias[currentCategory].push(listaDeFlores[i].name)
@@ -106,4 +86,4 @@ const agrupaCategorias = (listaDeFlores) => {
     return categorias;
 }
 
-    var d = agrupaCategorias(data.flowerlist)
+var d = agrupaCategorias(data.flowerlist)
