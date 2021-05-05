@@ -1,9 +1,8 @@
-const extrairTodosOsNomes = (listaDeFlores) => {
-
+const extraiNomesMap = (listaDeFlores) => {
     return listaDeFlores.map((flor) => flor.name)
 };
 
-const extraiNomes = (listaDeFlores) => {
+const extraiNomesForeach = (listaDeFlores) => {
     let todosOsNomes = []
     listaDeFlores.forEach((flor) => {
         todosOsNomes.push(flor.name)
@@ -12,6 +11,6 @@ const extraiNomes = (listaDeFlores) => {
 };
 
 module.exports = {
-    extrairTodosOsNomes,
-    extraiNomes,
+    extraiNomesMap,
+    extraiNomesForeach,
 }

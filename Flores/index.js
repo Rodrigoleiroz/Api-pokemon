@@ -8,8 +8,8 @@ const data = JSON.parse(jsonData);
 
 //chamadas
 
-const nomes = utils.extraiNomes(data.flowerlist);
-const nomes2 = utils.extrairTodosOsNomes(data.flowerlist)
+const nomes = utils.extraiNomesForeach(data.flowerlist);
+const nomes2 = utils.extraiNomesMap(data.flowerlist)
 
 console.log("Todos os nomes", resultadoTodosNomes)
 
