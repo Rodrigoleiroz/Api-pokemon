@@ -21,6 +21,35 @@ const buscaNomeOuCategoria = (listaDeFlores, parteNomeOuCategoria) => {
         return achouNome || achouCategoria
     });
 
+};
+
+const totalDosPrecos = (listaDeFlores) => {
+    let total = 0
+    listaDeFlores.forEach((flor) => {
+
+        let preco = flor.price;
+        total = total + preco;
+    })
+    return total
+};
+
+const achaPeloId = (listaDeFlores, id) => {
+    return listaDeFlores.find((flor) => flor.productId == id);
+}
+
+const agrupaCategorias = (listaDeFlores) => {
+
+    var categorias = {};
+
+    for (var i = 0; i < listaDeFlores.length; ++i) {
+        var currentCategory = listaDeFlores[i].category;
+        if (categorias[currentCategory] == undefined) {
+            categorias[currentCategory] = [];
+        }
+        categorias[currentCategory].push(listaDeFlores[i].name)
+
+    }
+    return categorias;
 }
 
 
@@ -29,5 +58,7 @@ module.exports = {
     extraiNomesForeach,
     buscaPeloNome,
     buscaNomeOuCategoria,
-
+    totalDosPrecos,
+    achaPeloId,
+    agrupaCategorias,
 }
