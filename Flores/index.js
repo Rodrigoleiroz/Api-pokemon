@@ -1,5 +1,5 @@
 const fs = require("fs");
-const utils = require('./utils');
+const flowerUtils = require('./utils');
 
 const jsonData = fs.readFileSync("./flores/data.json", "utf8");
 const data = JSON.parse(jsonData);
@@ -8,30 +8,17 @@ const data = JSON.parse(jsonData);
 
 //chamadas
 
-const nomes = utils.extraiNomesForeach(data.flowerlist);
-const nomes2 = utils.extraiNomesMap(data.flowerlist);
-const buscaNome = utils.buscaFloresPeloNome(data.flowerlist, "cAc")
+const nomes = flowerUtils.extraiNomesForeach(data.flowerlist);
+const nomes2 = flowerUtils.extraiNomesMap(data.flowerlist);
+const buscaNome = flowerUtils.buscaFloresPeloNome(data.flowerlist, "cAc")
 
 console.log("Todos os nomes", resultadoTodosNomes)
 
-// funcao que busca por flores dado um pedaço do nome ou descriçao
-
-var resultado = buscaFloresPeloNome(data.flowerlist, "opu")
-
-console.log("sera que funfo", resultado);
-
-// Busca mais generica.
 
 
 
-const buscaFlores = (listaDeFlores, parteNomeOuCategoria) => {
-    return listaDeFlores.filter((flor) => {
-        const achouNome = flor.name.toLowerCase().includes(parteNomeOuCategoria.toLowerCase())
-        const achouCategoria = flor.category.toLowerCase().includes(parteNomeOuCategoria.toLowerCase())
-        return achouNome || achouCategoria
-    });
 
-}
+
 
 let buscaPorNomeOuCategoria = buscaFlores(data.flowerlist, "red")
 
